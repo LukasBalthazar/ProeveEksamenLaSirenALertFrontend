@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Siren</title>
+</head>
+<body>
+<header id="header-container"></header>
+
+<main>
+  <h1>Edit Siren</h1>
+  <form id="sirenForm" action="http://localhost:8080/sirens">
+    <div>
+      <label for="name">Location name</label>
+      <input type="text" name="name" id="name">
+    </div>
+    <div>
+      <label for="latitude">Latitude</label>
+      <input type="text" name="latitude" id="latitude">
+    </div>
+    <div>
+      <label for="longitude">Longitude</label>
+      <input type="text" name="longitude" id="longitude">
+    </div>
+    <div>
+      <label for="status">Status</label>
+      <input type="text" name="status" id="status">
+    </div>
+    <div>
+      <label for="disabled">Disabled</label>
+      <input type="checkbox" name="disabled" id="disabled">
+    </div>
+    <button type="submit">Submit Changes</button>
+  </form>
+</main>
+</body>
+<script type="module" src="js/edit-sirens.js"></script>
+</html>

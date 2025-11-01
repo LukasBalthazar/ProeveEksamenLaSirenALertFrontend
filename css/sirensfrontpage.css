@@ -1,0 +1,141 @@
+
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    color: #2c3e50;
+    margin: 0;
+    padding: 0 20px 40px 20px;
+}
+
+/* Main container */
+
+main {
+    height: 100%;
+    margin: 40px auto 80px auto;
+    background-color: white;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(44, 62, 80, 0.15);
+}
+
+/* H1 styling */
+
+main h1 {
+    margin-top: 0;
+    color: #2c3e50;
+    font-weight: 700;
+    font-size: 28px;
+}
+
+/* Link til “Add” sider */
+
+main > a {
+    display: inline-block;
+    margin: 20px 0 30px 0;
+    padding: 10px 22px;
+    background-color: #3498db;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+main > a:hover,
+main > a:focus {
+    background-color: #2980b9;
+    outline: none;
+}
+
+/* Table fælles styling */
+
+.tableOfSirens,
+.tableOfFires {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.tableOfSirens th,
+.tableOfSirens td,
+.tableOfFires th,
+.tableOfFires td {
+    padding: 14px 18px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.tableOfSirens th,
+.tableOfFires th {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.tableOfSirens tr:nth-child(even),
+.tableOfFires tr:nth-child(even) {
+    background-color: #f9fbfc;
+}
+
+.tableOfSirens tr:hover,
+.tableOfFires tr:hover {
+    background-color: #d6e9ff;
+}
+
+.tableOfSirens td a,
+.tableOfFires td a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.tableOfSirens td a:hover,
+.tableOfSirens td a:focus,
+.tableOfFires td a:hover,
+.tableOfFires td a:focus {
+    text-decoration: underline;
+    outline: none;
+}
+
+main img {
+    display: block;
+    margin: 0px auto 0 auto;
+    width: 90%;
+    height: 80%;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(44, 62, 80, 0.2);
+    object-fit: cover;
+}
+
+.toggleStatusBtn {
+    padding: 4px 8px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.toggleStatusBtn:hover {
+    background-color: #0056b3;
+}
+
+.deleteBtn {
+    padding: 4px 8px;
+    background-color: #d7423e;
+    color: red;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.deleteBtn:hover {
+    background-color: #79312f;
+}
+
+
+

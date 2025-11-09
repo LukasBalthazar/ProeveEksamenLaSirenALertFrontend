@@ -34,5 +34,16 @@ async function putObjectAsJson(url, obj) {
     if (!r.ok) throw new Error(await r.text());
     return parseJsonOrNull(r);
 }
+async function getObjectAsJson(url, obj, httpVerb){
+    const response = await fetch(url, {
+        method: httpVerb,
+        headers: { "Content-Type": "application/json"},
+        body: JSON.stringify(obj)
+    });
+    return response;
+}
 
-export { fetchAnyUrl, postObjectAsJson, putObjectAsJson, restDelete };
+
+
+
+export { fetchAnyUrl, postObjectAsJson, putObjectAsJson, restDelete, getObjectAsJson};

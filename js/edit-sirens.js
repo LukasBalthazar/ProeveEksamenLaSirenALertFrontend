@@ -1,37 +1,29 @@
-import {fetchAnyUrl, restDelete, postObjectAsJson, putObjectAsJson, getObjectAsJson} from "./modulejson.js";
+import { getObjectAsJson } from "./modulejson.js";
 
 document.addEventListener("DOMContentLoaded", initForm);
-let sirenForm
+let sirenForm;
 
 async function initForm() {
-    sirenForm = document.querySelector("#sirenForm")
+    sirenForm = document.querySelector("#sirenForm");
     const params = new URLSearchParams(window.location.search);
     const sirenId = params.get("id");
-    if(!sirenId){
-        alert("siren id is missing")
-        return
+
+    if (!sirenId) {
+        alert("Siren id is missing");
+        return;
     }
 
-    const siren = await fetchSiren(sirenId);
-    if(siren) {
-        fillForm(siren)
-        sirenForm.action = `http://localhost:8080/sirens/${requestedId}`;
+    // Fetch siren data
+    const response = await fetch(`http://localhost:8080/sirens/${sirenId}`);
+    if (!response.ok) {
+        alert("Could not fetch siren data");
+        return;
     }
+    const siren = await response.json();
+    fillForm(siren);
 
+    sirenForm.action = `http://localhost:8080/sirens/${sirenId}`;
     sirenForm.addEventListener("submit", handleFormSubmit);
-}
-
-
-
-async function fetchSiren(requestedId){
-    try {
-        const response = await fetch(`http://localhost:8080/sirens/${requestedId}`);
-        if (!response.ok) throw new Error("Siren not found");
-        return await response.json();
-    } catch (err) {
-        console.error("Error fetching siren:", err);
-        alert("Was unable to fetch siren data")
-    }
 }
 
 function fillForm(siren) {
@@ -39,32 +31,25 @@ function fillForm(siren) {
     sirenForm.latitude.value = siren.latitude;
     sirenForm.longitude.value = siren.longitude;
     sirenForm.status.value = siren.status;
-    sirenForm.disabled.value = siren.disabled;
+    sirenForm.disabled.checked = siren.disabled; // works with boolean
 }
 
 async function handleFormSubmit(event) {
-    event.preventDefault()
-    const form = event.currentTarget
-    const url = form.action
-    try {
-        const formData = new FormData(form)
-        const response = await putFormDataAsJson(url, formData)
-        if(response.ok) {
-            window.location.href = "all-sirens.html"
-        }
-    } catch (error)
-    {
-        alert(error.message)
-        console.log(error)
+    event.preventDefault();
+
+    const f = event.currentTarget;
+    const sirenData = {
+        name: f.name.value,
+        latitude: Number(f.latitude.value),
+        longitude: Number(f.longitude.value),
+        status: f.status.value,
+        disabled: f.disabled.checked // ✅ real boolean value
+    };
+
+    const response = await getObjectAsJson(f.action, sirenData, "PUT");
+    if (response.ok) {
+        window.location.href = "all-sirens.html";
+    } else {
+        alert("Failed to update siren");
     }
-}
-async  function putFormDataAsJson(url, formData) {
-    console.log(url)
-    console.log(formData)
-    const plainFormData = Object.fromEntries(formData.entries())
-    const resp = await getObjectAsJson(url, plainFormData, "GET")
-    return  resp
-} async function parseJsonOrNull(r) {
-    const text = await r.text();
-    return text ? JSON.parse(text) : null;
 }
